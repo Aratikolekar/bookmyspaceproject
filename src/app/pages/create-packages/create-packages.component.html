@@ -1,0 +1,145 @@
+<div class="container-fluid">
+  <div class="row me-3">
+    <div class="offset-md-9 col-md-3 mt-2">
+      <div class="float-end">
+        <button class="btn btn-sm btn-secondary bg-warning text-dark me-2 fs-5" (click)="listView()"><i class="fa fa-bars"></i></button>
+        <button class="btn btn-sm btn-secondary  bg-warning text-dark fs-5" (click)="gridView()"><i class="fa fa-th-large"></i></button>
+        <!-- <i class="fa-brands fa-intercom"></i> -->
+      </div>
+    </div>
+  </div>
+  <div class="row m-3" *ngIf="list">
+
+    <div [ngClass]="isSidePannelOpen?'col-8':'col-12'">
+      <div class="card">
+        <div class="card-header bg-secondary d-flex justify-content-between ">
+         <p class="text-white fs-5"> All Packages</p>
+          <button class="btn btn-warning" (click)="OpenPannel()">Add</button>
+
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <th>package Name</th>
+              <th>package Cost</th>
+              <th>package Description</th>
+              <th>package Description</th>
+              <th>isPackage Active</th>
+              <th>Action</th>
+            </thead>
+            <tbody *ngIf="isLoader==false">
+              <tr *ngFor="let package of packageArray;let sr =index">
+                <td>{{sr+1}}</td>
+                <td>{{package.packageName}}</td>
+                <td>{{package.packageCost}}</td>
+                <td>{{package.packageDescription}}</td>
+                <td>{{package.isPackageActive}}</td>
+
+                <td>
+                  <button class="btn btn-sm btn-warning ms-2 mt-2" (click)="onEdit(package.packageId)">Edit</button>
+                  <button class="btn btn-sm btn-danger ms-2 mt-2" (click)="onDelete(package.packageId)">Delete</button>
+
+                </td>
+
+              </tr>
+            </tbody>
+            <tbody *ngIf="isLoader==true">
+              <tr>
+                <td colspan="6" class="text-center">
+                  <div class="spinner-grow text-muted"></div>
+                  <div class="spinner-grow text-primary"></div>
+                  <div class="spinner-grow text-success"></div>
+                  <div class="spinner-grow text-info"></div>
+                  <div class="spinner-grow text-warning"></div>
+                  <div class="spinner-grow text-danger"></div>
+                  <div class="spinner-grow text-secondary"></div>
+                  <div class="spinner-grow text-dark"></div>
+                  <div class="spinner-grow text-light"></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</div>
+
+      <div class="col-4" *ngIf="isSidePannelOpen">
+        <div class="card">
+          <div class="card-header bg-secondary text-end">
+            <button class="btn btn-warning" (click)="closePannel()">Close</button>
+          </div>
+          <div class="card-body">
+             <!-- <form > -->
+            <div class="row">
+
+              <div class="col-6">
+
+                <label for=""> packageName</label>
+                <input type="text" class="form-control" #name="ngModel" required minlength="4" class="form-control"
+                  [(ngModel)]="packageObj.packageName">
+                <div class="text danger" *ngIf="name.touched||name.dirty">
+                  <span *ngIf="name.errors?.['required']">required</span>
+                  <span *ngIf="name.errors?.['minlength']">minimum 4 characters</span>
+
+                </div>
+              </div>
+              <div class="col-6">
+                <label for=""> package Cost</label>
+                <input type="text" class="form-control" name="packageCost" [(ngModel)]="packageObj.packageCost">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <label for=""> package Description</label>
+                <input type="text" class="form-control" name="packageDescription"
+                  [(ngModel)]="packageObj.packageDescription">
+              </div>
+              <div class="col-6">
+                <label for=""> isPackage Active</label><br>
+                <input type="checkbox" class="m-2 p-3" name="isPackageActive" [(ngModel)]="packageObj.isPackageActive">
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-6">
+                <button class="btn btn-danger" (click)="onReset()">Reset</button>
+              </div>
+              <div class="col-6">
+                <button class="btn btn-success ms-4" *ngIf="packageObj.packageId ==0"   (click)="addPackage()">Save <span class="spinner-grow spinner-grow-sm" *ngIf="isAPICallInProgress"></span></button>
+                <button class="btn btn-primary ms-4" *ngIf="packageObj.packageId !==0" (click)="onUpdate()">Update <span class="spinner-grow spinner-grow-sm" *ngIf="isAPICallInProgress"></span></button>
+
+              </div>
+              </div>
+            <!-- </form> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row m-4" *ngIf="grid">
+      <div class="col-4" [ngClass]="list?'col-12':''" *ngFor="let item of packageArray">
+        <div class="card m-3 ">
+
+          <div class="card-body">
+            <div class="row">
+              <div [ngClass]="list?'col-8':'col-12'">
+                <div>
+                  <p  class="text-dark"><b>Package Name:</b>{{item.packageName}}</p>
+                  <p  class="text-dark"><b>Package Cost:</b>{{item.packageCost|currency:"INR"}}</p>
+                  <p  class="text-dark" ><b>Package Description:</b>{{item.packageDescription}}</p>
+                  <p class="text-dark" *ngIf="item.isPackageActive == true"><b>Is Active:</b> Yes</p>
+                  <p class="text-dark" *ngIf="!item.isPackageActive"><b>Is Active:</b> No</p>
+                </div>
+                <div class="mt-2 d-flex">
+                  <button class="btn btn-sm text-dark  bg-warning" (click)="onEdit(item.packageId)">Edit <i class="fa-solid fa-pen-to-square"></i></button>
+
+                  <button class="btn btn-sm text-dark  bg-danger ms-2" (click)="onDelete(item.packageId)">Delete <i class="fa-solid fa-trash-can"></i></button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+

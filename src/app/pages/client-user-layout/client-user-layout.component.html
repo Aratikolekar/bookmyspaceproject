@@ -1,0 +1,63 @@
+
+
+<div class="parent">
+  <div class="row mb-4">
+    <div class="col-12">
+      <nav class="navbar navbar-expand-sm bg-warning d-flex  justify-content-between">
+
+        <ul class="navbar-nav">
+         <p class="fs-5 text-white pt-2">mySpace</p>
+          <li class="nav-item">
+            <a class="nav-link text-white ms-5 fs-5" routerLink="user-dashboard">Dashboard </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white  fs-5" routerLink="book-room">Book room</a>
+          </li>
+
+
+        </ul>
+        <div class="">
+
+
+            <li class="nav-item justify-content-end">
+              <span class="fs-4 text-white me-2"><i class="fa-solid fa-user text-secondary me-3"></i> {{userName}}</span>
+
+              <button class="btn btn-danger me-3" (click)="onLogout()">Logout<i class="fa-solid fa-arrow-right ms-2"></i></button>
+            </li>
+
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>
+<div>
+  <!-- <nav class="navbar navbar-expand-lg bg-dark ">
+    <div class="container-fluid">
+      <a class="navbar-brand text-white">mySpace</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active text-white" aria-current="page" routerLink="user-dashboard">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" routerLink="book-room">Book room</a>
+          </li>
+
+        </ul>
+        <form class="d-flex" role="search">
+
+
+          <span class="fs-4 text-white me-2"><i class="fa-solid fa-user text-secondary me-3"></i> {{userName}}</span>
+          <button class="btn btn-danger me-3" (click)="onLogout()">Logout<i class="fa-solid fa-arrow-right ms-2"></i></button>
+
+        </form>
+      </div>
+    </div>
+  </nav> -->
+  <router-outlet></router-outlet>
+
+
+

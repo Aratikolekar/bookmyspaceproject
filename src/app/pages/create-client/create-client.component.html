@@ -1,0 +1,131 @@
+<div class="container-fluid">
+  <div class="row">
+    <div [ngClass]="isSidePannelOpen?'col-8':'col-12'">
+      <div class="card">
+        <div class="card-header bg-secondary text-end">
+          <button class="btn btn-warning" (click)="openPannel()" >Open Pannel</button>
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Sr No</th>
+                <th>Client Name</th>
+                <th>Company Name</th>
+                <th>Address</th>
+                <th>Employee Strength</th>
+                <th>Contact No</th>
+                <th>Action</th>
+
+              </tr>
+            </thead>
+            <tbody *ngIf="isLoader==false">
+
+              <tr *ngFor="let client of clientArray;let sr=index">
+                <td>{{sr+1}}</td>
+                <td>{{client.clientName}}</td>
+                <td>{{client.companyName}}</td>
+                <td>{{client.address}}</td>
+                <td>{{client.employeeStrength}}</td>
+                <td>{{client.contactNo}}</td>
+                <td class="d-flex">
+                  <button class="btn btn-warning btn-sm  ms-2 mt-2" (click)="onEdit(client.clientId)">Edit </button>
+                  <button class="btn btn-danger btn-sm ms-2 mt-2" (click)="onDelete(client.clientId)">Delete </button>
+
+                </td>
+
+              </tr>
+            </tbody>
+            <tbody *ngIf="isLoader==true">
+              <tr>
+                <td colspan="6" class="text-center">
+                  <div class="spinner-grow text-muted"></div>
+                  <div class="spinner-grow text-primary"></div>
+                  <div class="spinner-grow text-success"></div>
+                  <div class="spinner-grow text-info"></div>
+                  <div class="spinner-grow text-warning"></div>
+                  <div class="spinner-grow text-danger"></div>
+                  <div class="spinner-grow text-secondary"></div>
+                  <div class="spinner-grow text-dark"></div>
+                  <div class="spinner-grow text-light"></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-4" *ngIf="isSidePannelOpen">
+      <div class="card">
+        <div class="card-header bg-secondary text-end">
+          <button class="btn btn-warning" (click)="closePannel()">Close</button>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <label for=""> Client Name</label>
+              <input type="text" class="form-control"  #name="ngModel" required minlength="4"  class="form-control"
+                [(ngModel)]="clientObj.clientName">
+                <div class="text danger" *ngIf="name.touched||name.dirty">
+                  <span *ngIf="name.errors?.['required']">required</span>
+                  <span *ngIf="name.errors?.['minlength']">minimum  4 characters</span>
+
+                </div>
+            </div>
+            <div class="col-6">
+              <label for=""> Company Name</label>
+              <input type="text" class="form-control" name="companyName" [(ngModel)]="clientObj.companyName">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label for=""> Address</label>
+              <input type="text" class="form-control" name="address" [(ngModel)]="clientObj.address">
+            </div>
+            <div class="col-6">
+              <label for=""> City</label>
+              <input type="text" class="form-control" name="city" [(ngModel)]="clientObj.city">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label for=""> PinCode</label>
+              <input type="text" class="form-control" name="pinCode" [(ngModel)]="clientObj.pinCode">
+            </div>
+            <div class="col-6">
+              <label for="">State</label>
+              <input type="text" class="form-control" name="state" [(ngModel)]="clientObj.state">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label for=""> Employee Strength</label>
+              <input type="text" class="form-control" name="employeeStrength" [(ngModel)]="clientObj.employeeStrength">
+            </div>
+            <div class="col-6">
+              <label for="">GstNo</label>
+              <input type="text" class="form-control" name="gstNo" [(ngModel)]="clientObj.gstNo">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label for="">Contact</label>
+              <input type="text" class="form-control" name="contactNo" [(ngModel)]="clientObj.contactNo">
+            </div>
+
+          </div>
+          <div class="row mt-3">
+            <div class="col-6">
+              <button class="btn btn-danger" (click)="onReset()">Reset</button>
+            </div>
+            <div class="col-6">
+              <button class="btn btn-success ms-4" *ngIf="clientObj.clientId ==0" (click)="addClient()">Save <span class="spinner-grow spinner-grow-sm" *ngIf="isAPICallInProgress"></span></button>
+              <button class="btn btn-primary ms-4" *ngIf="clientObj.clientId !==0" (click)="onUpdate()">Update <span class="spinner-grow spinner-grow-sm" *ngIf="isAPICallInProgress"></span></button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,190 @@
+<div class="container-fluid">
+
+  <div class="row m-3">
+
+    <div [ngClass]="isSidePannelOpen?'col-8':'col-12'">
+      <div class="card">
+        <div class="card-header bg-secondary text-end  d-flex justify-content-between">
+          <p class="text-white fs-5 ">All Packages</p>
+          <button class="btn btn-warning" (click)="OpenPannel()">Add<i
+              class="fa-solid fa-arrow-right ms-2"></i></button>
+
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered table-striped text-center">
+            <thead>
+              <th>Sr No</th>
+
+              <th>Package Start Date</th>
+              <th>Package End Date</th>
+              <th>Is Active</th>
+              <th>Package Name</th>
+              <th>Client Name</th>
+              <th>Action</th>
+            </thead>
+            <tbody *ngIf="isLoader==false">
+              <tr *ngFor="let package of packageArray;let sr =index">
+                <td>{{sr+1}}</td>
+
+                <td>{{package.packageStartDate | date:'dd-MMM-yyyy'}}</td>
+                <td>{{package.packageEndDate | date:'dd-MMM-yyyy'}}</td>
+                <td>{{package.isActive}}</td>
+                <td>{{package.packageName}}</td>
+                <td>{{package.clientName}}</td>
+                <td>
+                  <button class="btn btn-sm btn-warning ms-2 mt-2"
+                    (click)="onEdit(package.clientPackageId)">Edit</button>
+                  <button class="btn btn-sm btn-danger ms-2 mt-2"
+                    (click)="onDelete(package.clientPackageId)">Delete</button>
+
+                </td>
+
+              </tr>
+            </tbody>
+            <tbody *ngIf="isLoader==true">
+              <tr>
+                <td colspan="6" class="text-center">
+                  <div class="spinner-grow text-muted"></div>
+                  <div class="spinner-grow text-primary"></div>
+                  <div class="spinner-grow text-success"></div>
+                  <div class="spinner-grow text-info"></div>
+                  <div class="spinner-grow text-warning"></div>
+                  <div class="spinner-grow text-danger"></div>
+                  <div class="spinner-grow text-secondary"></div>
+                  <div class="spinner-grow text-dark"></div>
+                  <div class="spinner-grow text-light"></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-4" *ngIf="isSidePannelOpen">
+      <div class="card">
+        <div class="card-header bg-secondary text-end">
+          <button class="btn btn-warning" (click)="closePannel()">Close</button>
+        </div>
+        <div class="card-body">
+          <form #form="ngForm">
+            <div class="row">
+
+              <div class="col-6">
+                <label for="">Select Client</label>
+                <select class="form-select" name="clientId" [(ngModel)]="packageObj.clientId">
+                  <option  disabled>Select Client</option>
+                  <option [value]="item.clientId" *ngFor="let item of clientArray">{{item.clientName}}</option>
+                </select>
+              </div>
+
+              <div class="col-6">
+                <label for="">Select Packages</label>
+                <select class="form-select" name="packageId" [(ngModel)]="packageObj.packageId">
+                  <option disabled>Select Package</option>
+                  <option [value]="item.packageId" *ngFor="let item of pkgArray2">{{item.packageName}}</option>
+                </select>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <label for=""> Package Start Date</label>
+                <input type="date" class="form-control " name="isPackageActive"
+                  [(ngModel)]="packageObj.packageStartDate">
+              </div>
+              <div class="col-6">
+                <label for="">Package End Date</label>
+                <input type="date" class="form-control" name="packageEndDate" [(ngModel)]="packageObj.packageEndDate">
+              </div>
+
+            </div>
+            <div class="row">
+
+              <div class="col-6">
+                <label for=""> Is Active</label><br>
+                <input type="checkbox" class="m-2 p-3" name="isActive" [(ngModel)]="packageObj.isActive">
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-12 text-center d-flex justify-content-between">
+                <button class="btn btn-danger" (click)="onReset()">Reset</button>
+
+                <button class="btn btn-success ms-4" [disabled]="form.invalid" *ngIf="packageObj.clientPackageId == 0"
+                  (click)="addPackage()">Save  <span class="spinner-grow spinner-grow-sm" *ngIf="isAPICallInProgress"></span></button>
+                <button class="btn btn-primary" *ngIf="packageObj.clientPackageId != 0"
+                  (click)="onUpdate()">Update  <span class="spinner-grow spinner-grow-sm" *ngIf="isAPICallInProgress"></span></button>
+
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="col-4">
+  <div class="modal" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h4 class="modal-title">Packages </h4>
+            <button type="button" class="btn-close" (click)="openModel()" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+           <form action="">
+            <div class="row">
+
+              <div class="col-6">
+                <label for="">Select Client</label>
+                <select class="form-select" [(ngModel)]="packageObj.clientId">
+                  <option value="0" disabled>Select Client</option>
+                  <option [value]="item.clientId" *ngFor="let item of clientArray">{{item.clientName}}</option>
+                </select>
+              </div>
+
+              <div class="col-6">
+                <label for="">Select Packages</label>
+                <select class="form-select" [(ngModel)]="packageObj.packageId">
+                  <option value="0" disabled>Select Package</option>
+                  <option [value]="item.packageId" *ngFor="let item of pkgArray2">{{item.packageName}}</option>
+                </select>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <label for=""> Package Start Date</label>
+                <input type="date" class="form-control " name="isPackageActive"
+                  [(ngModel)]="packageObj.packageStartDate">
+              </div>
+              <div class="col-6">
+                <label for="">Package End Date</label>
+                <input type="date" class="form-control" name="packageEndDate" [(ngModel)]="packageObj.packageEndDate">
+              </div>
+
+            </div>
+            <div class="row">
+
+              <div class="col-6">
+                <label for=""> Is Active</label><br>
+                <input type="checkbox" class="m-2 p-3" name="isActive" [(ngModel)]="packageObj.isActive">
+              </div>
+            </div>
+           </form>
+          </div>
+          <div class="modal-footer d-flex">
+            <button class="btn btn-success ms-4" *ngIf="packageObj.clientPackageId == 0"
+                  (click)="addPackage()">Save</button>
+            <button class="btn btn-primary" *ngIf="packageObj.clientPackageId != 0"
+            (click)="onUpdate()">Update</button>
+
+            <button type="button" class="btn btn-danger" (click)="closeModel()" data-bs-dismiss="modal">Close</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+</div>  -->

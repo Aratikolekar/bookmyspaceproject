@@ -1,0 +1,129 @@
+<div class="container-fluid">
+  <div class="row">
+    <div [ngClass]="isSidePannelOpen?'col-8':'col-12'">
+      <div class="card">
+        <div class="card-header bg-secondary text-end d-flex justify-content-between">
+         <p class="text-white">All User</p>
+          <button class="btn btn-warning" (click)="openPannel()" >Add<i class="fa-solid fa-arrow-right ms-2"></i></button>
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+
+                <th>Sr No</th>
+
+                <th>User Name</th>
+                <th>User Password</th>
+                <th>Is Active</th>
+                <th>Client Name</th>
+                <th>Role</th>
+                <th>Action</th>
+
+              </tr>
+            </thead>
+            <tbody *ngIf="isLoader==false">
+              <tr *ngFor="let user of userArray;let sr=index">
+                <td>{{sr+1}}</td>
+                <td>{{user.userName}}</td>
+                <td>{{user.userPassword}}</td>
+                <td>{{user.isActive}}</td>
+                <td>{{user.clientName}}</td>
+                <td>{{user.role}}
+
+                </td>
+                 <td class="d-flex">
+                  <button class="btn btn-warning btn-sm  ms-2 mt-2" (click)="onEdit(user.userId)">Edit </button>
+                  <button class="btn btn-danger btn-sm ms-2 mt-2" (click)="onDelete(user.userId)">Delete </button>
+
+                </td>
+
+              </tr>
+            </tbody>
+            <tbody *ngIf="isLoader==true">
+              <tr>
+                <td colspan="6" class="text-center">
+                  <div class="spinner-grow text-muted"></div>
+                  <div class="spinner-grow text-primary"></div>
+                  <div class="spinner-grow text-success"></div>
+                  <div class="spinner-grow text-info"></div>
+                  <div class="spinner-grow text-warning"></div>
+                  <div class="spinner-grow text-danger"></div>
+                  <div class="spinner-grow text-secondary"></div>
+                  <div class="spinner-grow text-dark"></div>
+                  <div class="spinner-grow text-light"></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-4" *ngIf="isSidePannelOpen">
+      <div class="card">
+        <div class="card-header bg-secondary text-end">
+          <button class="btn btn-warning" (click)="closePannel()">Close</button>
+        </div>
+        <div class="card-body">
+          <div class="row" *ngIf="localData.role !== 'ClientAdmin'">
+            <div class="col-6">
+              <select class="form-select" name="clientId" [(ngModel)]="userObj.clientId">
+                <option  disabled>Select Client</option>
+                <option [value]="item.clientId" *ngFor="let item of clientArray">{{item.clientName}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label for=""> User Name</label>
+              <input type="text" class="form-control"  #name="ngModel" required minlength="4"  class="form-control"
+                [(ngModel)]="userObj.userName">
+                <div class="text-danger" *ngIf="name.touched||name.dirty">
+                  <span *ngIf="name.errors?.['required']">required</span>
+                  <span *ngIf="name.errors?.['minlength']">minimum  4 characters</span>
+
+                </div>
+            </div>
+            <div class="col-6">
+              <label for=""> User Password</label>
+              <input type="text" class="form-control" name="userPassword" [(ngModel)]="userObj.userPassword">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label for=""> Is Active</label><br>
+              <input type="checkbox" class="form-check" name="isActive" [(ngModel)]="userObj.isActive">
+            </div>
+            <div class="col-6">
+              <label for=""> Role</label>
+              <!-- <input type="text" class="form-control" name="role" [(ngModel)]="userObj.role"> -->
+
+              <select class="form-select" name="role" [(ngModel)]="userObj.role">
+                <option value="ClientAdmin">ClientAdmin</option>
+                <option value="ClientUser">ClientUser</option>
+
+
+
+              </select>
+
+            </div>
+          </div>
+
+
+
+          <div class="row mt-3">
+            <div class="col-6">
+              <button class="btn btn-danger" (click)="onReset()">Reset</button>
+            </div>
+            <div class="col-6">
+              <button class="btn btn-success ms-4" *ngIf="userObj.userId ==0" (click)="addUser()">Save  <span class="spinner-grow spinner-grow-sm" *ngIf="isAPICallInProgress"></span></button>
+              <button class="btn btn-primary ms-4" *ngIf="userObj.userId !==0" (click)="updateUser()">Update  <span class="spinner-grow spinner-grow-sm" *ngIf="isAPICallInProgress"></span></button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+

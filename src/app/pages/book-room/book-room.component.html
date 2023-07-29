@@ -1,0 +1,114 @@
+<div class="container-fluid">
+  <div class="row">
+    <div [ngClass]="isSidePannelOpen?'col-8':'col-12'">
+      <div class="card">
+        <div class="card-header bg-secondary d-flex justify-content-between">
+          <p class="text-white fs-5">All Room</p>
+          <button class="btn btn-warning" (click)="openPannel()">Open Pannel</button>
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered table-striped">
+            <thead>
+
+              <tr>
+                <th>Sr No</th>
+                <th>Client Name</th>
+
+                <th>User Name</th>
+                <th>Booking Date</th>
+                <th>From Time </th>
+                <th>To Time</th>
+                <th>Action</th>
+
+              </tr>
+            </thead>
+            <tbody *ngIf="isLoader==false">
+              <tr *ngFor="let room of booRoomArray;let sr=index">
+                <td>{{sr+1}}</td>
+                <td>{{room.clientName}}</td>
+                <td>{{room.userName}}</td>
+                <td>{{room.bookingDate|date:"dd-MMM-yy"}}</td>
+                <td>{{room.fromTime}}</td>
+                <td>{{room.toTime}}</td>
+
+
+                <td class="d-flex">
+                  <button class="btn btn-warning btn-sm  ms-2 mt-2" (click)="onEdit(room.bookingId)">Edit </button>
+                  <button class="btn btn-danger btn-sm ms-2 mt-2" (click)="onDelete(room.bookingId)">Delete </button>
+
+                </td>
+
+              </tr>
+            </tbody>
+            <tbody *ngIf="isLoader==true">
+              <tr>
+                <td colspan="6" class="text-center">
+                  <div class="spinner-grow text-muted"></div>
+                  <div class="spinner-grow text-primary"></div>
+                  <div class="spinner-grow text-success"></div>
+                  <div class="spinner-grow text-info"></div>
+                  <div class="spinner-grow text-warning"></div>
+                  <div class="spinner-grow text-danger"></div>
+                  <div class="spinner-grow text-secondary"></div>
+                  <div class="spinner-grow text-dark"></div>
+                  <div class="spinner-grow text-light"></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-4" *ngIf="isSidePannelOpen">
+      <div class="card">
+        <div class="card-header bg-secondary text-end">
+          <button class="btn btn-warning" (click)="closePannel()">Close</button>
+        </div>
+        <div class="card-body">
+          <form #form=ngForm>
+            <div class="row">
+              <div class="col-6">
+                <label for="">All Rooms</label>
+                <select class="form-select" name="roomId" [(ngModel)]="bookRoomObj.roomId">
+                  <option>Select Rooms</option>
+                  <option [value]="item.roomId" *ngFor="let item of roomArray">{{item.roomName}}</option>
+                </select>
+              </div>
+              <div class="col-6">
+                <label for="">Booking Date</label>
+                <input type="date" class="form-control" name="bookingDate" [(ngModel)]="bookRoomObj.bookingDate">
+              </div>
+            </div>
+            {{bookRoomObj.userId}}
+            <div class="row">
+
+
+              <div class="col-6">
+                <label for="">From Time</label>
+                <input type="time" class="form-control" name="fromTime" [(ngModel)]="bookRoomObj.fromTime">
+              </div>
+              <div class="col-6">
+                <label for="">To Time</label>
+                <input type="time" class="form-control" name="toTime" [(ngModel)]="bookRoomObj.toTime">
+              </div>
+            </div>
+
+
+            <div class="row mt-3">
+              <div class="col-6">
+                <button class="btn btn-danger" (click)="onReset()">Reset</button>
+              </div>
+              <div class="col-6">
+                <button class="btn btn-success ms-4" *ngIf="bookRoomObj.bookingId ==0" (click)="bookNewRoom()">Save
+                  <span class="spinner-grow spinner-grow-sm" *ngIf="isAPICallInProgress"></span></button>
+                <button class="btn btn-primary ms-4" *ngIf="bookRoomObj.bookingId !=0" (click)="onUpdate()">Update <span
+                    class="spinner-grow spinner-grow-sm" *ngIf="isAPICallInProgress"></span></button>
+
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
