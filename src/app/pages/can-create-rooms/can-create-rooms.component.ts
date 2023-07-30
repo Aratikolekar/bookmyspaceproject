@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { MasterService } from 'src/app/core/services/master.service';
 
 @Component({
@@ -23,7 +24,11 @@ export class CanCreateRoomsComponent {
     lastUpdatetd: new Date(),
   };
   roomArray: any[] = [];
-  constructor(private http: HttpClient, private masterServ: MasterService) {
+  constructor(
+    private http: HttpClient,
+    private toastrSrv: ToastrService,
+    private masterServ: MasterService
+  ) {
     this.getRoom();
     this.getAllClient();
   }
@@ -65,11 +70,11 @@ export class CanCreateRoomsComponent {
         if (res.result) {
           this.getRoom();
           this.onReset();
-          alert(res.message);
+          this.toastrSrv.success(res.message);
         }
         this.isAPICallInProgress == false;
         // else {
-        //   alert(res.message);
+        // this.toastrSrv.error(res.message);
         // }
       });
     }
@@ -85,27 +90,27 @@ export class CanCreateRoomsComponent {
     if (this.isAPICallInProgress == false) {
       this.isAPICallInProgress = true;
       this.masterServ.onUpdateRoom(this.roomObj).subscribe((res: any) => {
-        this.roomObj = res.data;
+
         if (res.result) {
           this.getRoom();
-          alert(res.message);
+          this.toastrSrv.success(res.message);
         }
         this.isAPICallInProgress == false;
         // else {
-        //   alert(res.message);
+        // this.toastrSrv.error(res.message);
         // }
       });
     }
   }
   onDelete(id: number) {
-    const isDelete=confirm('Are you sure want to delete')
+    const isDelete = confirm('Are you sure want to delete');
     this.masterServ.onDeleteRoom(id).subscribe((res: any) => {
       this.roomObj = res.data;
       if (res.result) {
         this.getRoom();
-        alert(res.message);
+        this.toastrSrv.success(res.message);
       } else {
-        alert(res.message);
+        this.toastrSrv.error(res.message);
       }
     });
   }

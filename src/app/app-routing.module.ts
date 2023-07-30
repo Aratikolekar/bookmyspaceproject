@@ -32,7 +32,8 @@ const routes: Routes = [
       { path: 'create-client', component: CreateClientComponent },
       { path: 'active-packages', component: ActivePackagesComponent },
       { path: 'assign-packages', component: AssignPackageComponent },
-
+      { path: 'book-room', component: BookRoomComponent },
+      { path: 'can-create-rooms', component: CanCreateRoomsComponent },
     ],
   },
   {
@@ -41,7 +42,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: 'user-dashboard', component: UserDashboardComponent },
-      { path: 'book-room', component: BookRoomComponent },
+      { path: 'bookRoom', component: BookRoomComponent },
     ],
   },
 
@@ -51,7 +52,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: 'client-dashboard', component: ClientDashboardComponent },
-      { path: 'can-create-rooms', component: CanCreateRoomsComponent },
+      { path: 'canCcreateRooms', component: CanCreateRoomsComponent },
       { path: 'create-user', component: CreateUserForClientComponent },
     ],
   },

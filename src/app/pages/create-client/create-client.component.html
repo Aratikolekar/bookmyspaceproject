@@ -3,7 +3,7 @@
     <div [ngClass]="isSidePannelOpen?'col-8':'col-12'">
       <div class="card">
         <div class="card-header bg-secondary text-end">
-          <button class="btn btn-warning" (click)="openPannel()" >Open Pannel</button>
+          <button class="btn btn-warning" (click)="openPannel()">Add</button>
         </div>
         <div class="card-body">
           <table class="table table-bordered table-striped">
@@ -65,13 +65,13 @@
           <div class="row">
             <div class="col-6">
               <label for=""> Client Name</label>
-              <input type="text" class="form-control"  #name="ngModel" required minlength="4"  class="form-control"
+              <input type="text" class="form-control" #name="ngModel" required minlength="4" class="form-control"
                 [(ngModel)]="clientObj.clientName">
-                <div class="text danger" *ngIf="name.touched||name.dirty">
-                  <span *ngIf="name.errors?.['required']">required</span>
-                  <span *ngIf="name.errors?.['minlength']">minimum  4 characters</span>
+              <div class="text danger" *ngIf="name.touched||name.dirty">
+                <span *ngIf="name.errors?.['required']">required</span>
+                <span *ngIf="name.errors?.['minlength']">minimum 4 characters</span>
 
-                </div>
+              </div>
             </div>
             <div class="col-6">
               <label for=""> Company Name</label>
@@ -120,8 +120,12 @@
               <button class="btn btn-danger" (click)="onReset()">Reset</button>
             </div>
             <div class="col-6">
-              <button class="btn btn-success ms-4" *ngIf="clientObj.clientId ==0" (click)="addClient()">Save <span class="spinner-grow spinner-grow-sm" *ngIf="isAPICallInProgress"></span></button>
-              <button class="btn btn-primary ms-4" *ngIf="clientObj.clientId !==0" (click)="onUpdate()">Update <span class="spinner-grow spinner-grow-sm" *ngIf="isAPICallInProgress"></span></button>
+
+
+              <button class="btn btn-success ms-4" *ngIf="clientObj.clientId ==0" (click)="addClient()">Save <span
+                  class="spinner-grow spinner-grow-sm" *ngIf="isAPICallInProgress"></span></button>
+              <button class="btn btn-primary ms-4" *ngIf="clientObj.clientId !==0" (click)="onUpdate()">Update <span
+                  class="spinner-grow spinner-grow-sm" *ngIf="isAPICallInProgress"></span></button>
 
             </div>
           </div>

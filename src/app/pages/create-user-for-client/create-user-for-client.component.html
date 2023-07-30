@@ -3,8 +3,9 @@
     <div [ngClass]="isSidePannelOpen?'col-8':'col-12'">
       <div class="card">
         <div class="card-header bg-secondary text-end d-flex justify-content-between">
-         <p class="text-white">All User</p>
-          <button class="btn btn-warning" (click)="openPannel()" >Add<i class="fa-solid fa-arrow-right ms-2"></i></button>
+          <p class="text-white">All User</p>
+          <button class="btn btn-warning" (click)="openPannel()">Add<i
+              class="fa-solid fa-arrow-right ms-2"></i></button>
         </div>
         <div class="card-body">
           <table class="table table-bordered table-striped">
@@ -32,7 +33,7 @@
                 <td>{{user.role}}
 
                 </td>
-                 <td class="d-flex">
+                <td class="d-flex">
                   <button class="btn btn-warning btn-sm  ms-2 mt-2" (click)="onEdit(user.userId)">Edit </button>
                   <button class="btn btn-danger btn-sm ms-2 mt-2" (click)="onDelete(user.userId)">Delete </button>
 
@@ -69,7 +70,7 @@
           <div class="row" *ngIf="localData.role !== 'ClientAdmin'">
             <div class="col-6">
               <select class="form-select" name="clientId" [(ngModel)]="userObj.clientId">
-                <option  disabled>Select Client</option>
+                <option disabled>Select Client</option>
                 <option [value]="item.clientId" *ngFor="let item of clientArray">{{item.clientName}}</option>
               </select>
             </div>
@@ -77,13 +78,13 @@
           <div class="row">
             <div class="col-6">
               <label for=""> User Name</label>
-              <input type="text" class="form-control"  #name="ngModel" required minlength="4"  class="form-control"
+              <input type="text" class="form-control" #name="ngModel" required minlength="4" class="form-control"
                 [(ngModel)]="userObj.userName">
-                <div class="text-danger" *ngIf="name.touched||name.dirty">
-                  <span *ngIf="name.errors?.['required']">required</span>
-                  <span *ngIf="name.errors?.['minlength']">minimum  4 characters</span>
+              <div class="text-danger" *ngIf="name.touched||name.dirty">
+                <span *ngIf="name.errors?.['required']">required</span>
+                <span *ngIf="name.errors?.['minlength']">minimum 4 characters</span>
 
-                </div>
+              </div>
             </div>
             <div class="col-6">
               <label for=""> User Password</label>
@@ -97,7 +98,6 @@
             </div>
             <div class="col-6">
               <label for=""> Role</label>
-              <!-- <input type="text" class="form-control" name="role" [(ngModel)]="userObj.role"> -->
 
               <select class="form-select" name="role" [(ngModel)]="userObj.role">
                 <option value="ClientAdmin">ClientAdmin</option>
@@ -117,8 +117,10 @@
               <button class="btn btn-danger" (click)="onReset()">Reset</button>
             </div>
             <div class="col-6">
-              <button class="btn btn-success ms-4" *ngIf="userObj.userId ==0" (click)="addUser()">Save  <span class="spinner-grow spinner-grow-sm" *ngIf="isAPICallInProgress"></span></button>
-              <button class="btn btn-primary ms-4" *ngIf="userObj.userId !==0" (click)="updateUser()">Update  <span class="spinner-grow spinner-grow-sm" *ngIf="isAPICallInProgress"></span></button>
+              <button class="btn btn-success ms-4" *ngIf="userObj.userId ==0" (click)="addUser()">Save <span
+                  class="spinner-grow spinner-grow-sm" *ngIf="isAPICallInProgress"></span></button>
+              <button class="btn btn-primary ms-4" *ngIf="userObj.userId !==0" (click)="updateUser()">Update <span
+                  class="spinner-grow spinner-grow-sm" *ngIf="isAPICallInProgress"></span></button>
 
             </div>
           </div>
@@ -126,4 +128,3 @@
       </div>
     </div>
   </div>
-

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { MasterService } from 'src/app/core/services/master.service';
 
 @Component({
@@ -25,7 +26,7 @@ export class AssignPackageComponent {
     isActive: false,
   };
 
-  constructor(private http: HttpClient, private masterServ: MasterService) {
+  constructor(private http: HttpClient, private masterServ: MasterService,private toastrSrv:ToastrService,) {
     this.getPackagePkg();
     this.getAllClient();
     this.getPackage();
@@ -84,19 +85,20 @@ export class AssignPackageComponent {
   }
   addPackage() {
     if (this.isAPICallInProgress == false) {
-      console.log('if ststement executed');
+
       this.isAPICallInProgress = true;
       this.masterServ.addNewPackage(this.packageObj).subscribe((res: any) => {
-        // this.packageObj = res.data;
+
         if (res.result) {
           this.getPackagePkg();
           this.onReset();
           this.isSidePannelOpen = false;
-          alert(res.message);
+          this.toastrSrv.success(res.message);
+
         }
         this.isAPICallInProgress == false;
         // else{
-        //   alert(res.message)
+      //this.toastrSrv.error(res.message);
         // }
       });
     }
@@ -111,7 +113,7 @@ export class AssignPackageComponent {
   }
   onUpdate() {
     if (this.isAPICallInProgress == false) {
-      console.log('if ststement executed');
+
       this.isAPICallInProgress = true;
       this.masterServ.onUpdatePackage(this.packageObj).subscribe((res: any) => {
         if (res.result) {
@@ -119,12 +121,12 @@ export class AssignPackageComponent {
           this.onReset();
           this.closeModel();
           this.isSidePannelOpen = false;
-          alert(res.message);
+          this.toastrSrv.success(res.message);
         }
         this.isAPICallInProgress = false;
 
         // else{
-        //   alert(res.message)
+       //this.toastrSrv.error(res.message);
         // }
       });
     }
@@ -135,9 +137,9 @@ export class AssignPackageComponent {
       if (res.result) {
         this.getPackagePkg();
         this.onReset();
-        alert(res.message);
+        this.toastrSrv.success(res.message);
       } else {
-        alert(res.message);
+      this.toastrSrv.error(res.message);
       }
     });
   }

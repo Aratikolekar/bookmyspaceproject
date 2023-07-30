@@ -4,7 +4,7 @@
       <div class="card">
         <div class="card-header bg-secondary d-flex justify-content-between">
           <p class="text-white fs-5">All Room</p>
-          <button class="btn btn-warning" (click)="openPannel()">Open Pannel</button>
+          <button class="btn btn-warning" (click)="openPannel()">Add</button>
         </div>
         <div class="card-body">
           <table class="table table-bordered table-striped">
@@ -22,7 +22,7 @@
 
               </tr>
             </thead>
-            <tbody  *ngIf="isLoader==false">
+            <tbody *ngIf="isLoader==false">
               <tr *ngFor="let room of roomArray;let sr=index">
                 <td>{{sr+1}}</td>
                 <td>{{room.roomName}}</td>
@@ -69,12 +69,12 @@
           <div class="row">
             <div class="col-6">
 
-                <label for="">Client Id</label>
+              <label for="">Client Id</label>
 
-                <select class="form-select" [(ngModel)]="roomObj.clientId">
-                  <option >Select Client</option>
-                  <option [value]="item.clientId" *ngFor="let item of clientArray" >{{item.clientName}}</option>
-                </select>
+              <select class="form-select" [(ngModel)]="roomObj.clientId">
+                <option>Select Client</option>
+                <option [value]="item.clientId" *ngFor="let item of clientArray">{{item.clientName}}</option>
+              </select>
 
             </div>
           </div>
@@ -102,7 +102,7 @@
             </div>
             <div class="col-6">
               <label for=""> Is Room Active</label><br>
-              <input type="checkbox"  name="isRoomActive" [(ngModel)]="roomObj.isRoomActive">
+              <input type="checkbox" name="isRoomActive" [(ngModel)]="roomObj.isRoomActive">
             </div>
           </div>
 
@@ -111,8 +111,10 @@
               <button class="btn btn-danger" (click)="onReset()">Reset</button>
             </div>
             <div class="col-6">
-              <button class="btn btn-success ms-4" *ngIf="roomObj.roomId ==0" (click)="addRoom()">Save  <span class="spinner-grow spinner-grow-sm" *ngIf="isAPICallInProgress"></span></button>
-              <button class="btn btn-primary ms-4" *ngIf="roomObj.roomId !=0" (click)="onUpdate()">Update  <span class="spinner-grow spinner-grow-sm" *ngIf="isAPICallInProgress"></span></button>
+              <button class="btn btn-success ms-4" *ngIf="roomObj.roomId ==0" (click)="addRoom()">Save <span
+                  class="spinner-grow spinner-grow-sm" *ngIf="isAPICallInProgress"></span></button>
+              <button class="btn btn-primary ms-4" *ngIf="roomObj.roomId !=0" (click)="onUpdate()">Update <span
+                  class="spinner-grow spinner-grow-sm" *ngIf="isAPICallInProgress"></span></button>
 
             </div>
           </div>

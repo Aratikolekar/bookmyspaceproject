@@ -1,39 +1,50 @@
 
 
   <div class="parent">
-    <div class="row mb-4">
-      <div class="col-12">
-        <nav class="navbar navbar-expand-sm bg-dark justify-content-between ">
-          <ul class="navbar-nav ">
-            <li class="nav-item ">
-              <a class="nav-link text-white fs-5 " routerLink="admin-dashboard">Dashboard</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white fs-5" routerLink="create-packages">Packages</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white fs-5" routerLink="create-user-for-client">User</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white fs-5" routerLink="create-client">Client</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white fs-5" routerLink="active-packages">Active-packages</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white fs-5" routerLink="assign-packages">Assign-packages</a>
-            </li>
+    <div class="container-fluid px-0">
+      <div class="row mb-4">
+        <div class="col-md-12">
 
+          <nav class="navbar navbar-expand-sm bg-dark justify-content-between ">
 
-          </ul>
-          <li class="nav-item me-2">
-           <span class="fs-4 text-white"><i class="fa-solid fa-user text-success me-1"></i>
-            {{userName}}</span>
-            <button class="btn btn-danger text-end fs-5 mt-2 ms-3" (click)="onLogout()">Logout<i class="fa-solid fa-arrow-right ms-2"></i></button>
-          </li>
-        </nav>
+            <ul class="navbar-nav ">
+              <li class="nav-item ">
+                <a class="nav-link text-white fs-5 pt-0 mt-1" >BookMySpace</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link text-white fs-6 ms-3" routerLink="admin-dashboard">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white fs-6" routerLink="create-packages">Packages</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white fs-6" routerLink="create-user-for-client">User</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white fs-6" routerLink="create-client">Client</a>
+              </li>
+              <!-- <li class="nav-item">
+                <a class="nav-link text-white fs-6" routerLink="active-packages">Active-packages</a>
+              </li> -->
+              <li class="nav-item">
+                <a class="nav-link text-white fs-6" routerLink="assign-packages">Assign-packages</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white  fs-6" routerLink="book-room">Bookings</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white fs-6" routerLink="can-create-rooms">Rooms</a>
+              </li>
+            </ul>
+            <li class="nav-item me-2">
+
+              <button class="btn btn-danger text-end  ms-3" (click)="onLogout()"><i class="fa-solid fa-right-from-bracket"></i></button>
+            </li>
+          </nav>
+        </div>
       </div>
     </div>
+
   </div>
   <div>
 

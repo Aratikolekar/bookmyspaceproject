@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { MasterService } from 'src/app/core/services/master.service';
 
 @Component({
@@ -24,7 +25,7 @@ export class BookRoomComponent {
     createdDate: new Date(),
     lastUpdated: new Date(),
   };
-  constructor(private http: HttpClient, private masterServ: MasterService) {
+  constructor(private http: HttpClient,private toastrSrv:ToastrService, private masterServ: MasterService) {
     this.getAllBooking();
     this.getRoom();
 
@@ -55,9 +56,9 @@ export class BookRoomComponent {
       });
   }
   bookNewRoom() {
-    console.log('add room');
+
     if (this.isAPICallInProgress == false) {
-      console.log('if ststement executed');
+
       this.isAPICallInProgress = true;
 
     this.masterServ.bookNewRoom(this.bookRoomObj )
@@ -67,19 +68,19 @@ export class BookRoomComponent {
 
           this.isSidePannelOpen = false;
 
-          alert(res.message);
+          this.toastrSrv.success(res.message);
         }
         this.isAPICallInProgress = false;
 
         // else {
-        //   alert(res.message);
+      //this.toastrSrv.error(res.message);
         // }
       });
     }
   }
   onUpdate() {
     if (this.isAPICallInProgress == false) {
-      //console.log('if ststement executed');
+
       this.isAPICallInProgress = true;
     this.masterServ.updateRoom(this.bookRoomObj )
       .subscribe((res: any) => {
@@ -88,11 +89,11 @@ export class BookRoomComponent {
           this.onReset();
           this.isSidePannelOpen = false;
 
-          alert(res.message);
+          this.toastrSrv.success(res.message);
         }
         this.isAPICallInProgress = false;
         // else {
-        //   alert(res.message);
+        //this.toastrSrv.error(res.message);
         // }
       });
     }
@@ -110,9 +111,9 @@ export class BookRoomComponent {
       .subscribe((res: any) => {
         if (res.result) {
           this.getAllBooking();
-          alert(res.message);
+          this.toastrSrv.success(res.message);
         } else {
-          alert(res.message);
+           this.toastrSrv.error(res.message);
         }
       });
   }

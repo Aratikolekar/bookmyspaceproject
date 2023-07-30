@@ -1,31 +1,194 @@
-<!-- <div class="container">
-  <div class="row">
-    <div class="col-8">
-      <table>
-        <thead>
-          <tr>
-            <th>totBookings</th>
-            <th>totClients</th>
-            <th>totPackages</th>
-            <th>totRooms</th>
-            <th>totUsers</th>
-            <th>totActivePackages</th>
-            <th>todaysBooking</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of adminArray">
-            <td>{{item.totBookings}}</td>
-            <td>{{item.totClients}}</td>
-            <td>{{item.totPackages}}</td>
-            <td>{{item.totRooms}}</td>
-            <td>{{item.totUsers}}</td>
-            <td>{{item.totActivePackages}}</td>
-            <td>{{item.todaysBooking}}</td>
-
-          </tr>
-        </tbody>
-      </table>
+<div class="container-fluid">
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <div class="flex-grow-1">
+        <h5 class="fw-medium text-dark mb-0 text-uppercase">Hello&nbsp;</h5>
+        <p class="text-muted mb-0">Here's what's happening today.</p>
+      </div>
     </div>
   </div>
-</div> -->
+
+  <div class="row mt-3">
+    <div class="col-xl-3 col-md-6">
+      <!-- card -->
+      <div class="card card-animate hand margin-card" routerLink="/admin-bookings">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="flex-grow-1 overflow-hidden">
+              <p class="text-uppercase fw-medium text-muted text-truncate mb-0 fs-14"> Total Bookings</p>
+            </div>
+          </div>
+          <div class="d-flex align-items-end justify-content-between mt-3">
+            <div>
+              <h4 class="fs-22 fw-semibold ff-secondary mb-0"></h4>
+              <a class="text-decoration-underline">View Total Bookings</a>
+            </div>
+            <div class="avatar-sm flex-shrink-0">
+              <span class="avatar-title bg-soft-success rounded fs-3">
+                <i class="fa fa-bookmark text-success" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
+        </div><!-- end card body -->
+      </div><!-- end card -->
+    </div><!-- end col -->
+    <div class="col-xl-3 col-md-6">
+      <!-- card -->
+      <div class="card card-animate hand margin-card" routerLink="/admin-assign-package">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="flex-grow-1 overflow-hidden">
+              <p class="text-uppercase fw-medium text-muted text-truncate mb-0 fs-14"> Total Active Packages</p>
+            </div>
+          </div>
+          <div class="d-flex align-items-end justify-content-between mt-3">
+            <div>
+              <h4 class="fs-22 fw-semibold ff-secondary mb-0"></h4>
+              <a class="text-decoration-underline">View Active Packages</a>
+            </div>
+            <div class="avatar-sm flex-shrink-0">
+              <span class="avatar-title bg-soft-info rounded fs-3">
+                <i class="fa fa-toggle-on text-info" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
+        </div><!-- end card body -->
+      </div><!-- end card -->
+    </div><!-- end col -->
+    <div class="col-xl-3 col-md-6">
+      <!-- card -->
+      <div class="card card-animate hand margin-card" routerLink="/admin-client">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="flex-grow-1 overflow-hidden">
+              <p class="text-uppercase fw-medium text-muted text-truncate mb-0 fs-14"> Total Clients</p>
+            </div>
+          </div>
+          <div class="d-flex align-items-end justify-content-between mt-3">
+            <div>
+              <h4 class="fs-22 fw-semibold ff-secondary mb-0"></h4>
+              <a class="text-decoration-underline">View Clients</a>
+            </div>
+            <div class="avatar-sm flex-shrink-0">
+              <span class="avatar-title bg-soft-warning rounded fs-3">
+                <i class="pi pi-users fs-3 text-warning" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
+        </div><!-- end card body -->
+      </div><!-- end card -->
+    </div><!-- end col -->
+    <div class="col-xl-3 col-md-6">
+      <!-- card -->
+      <div class="card card-animate hand margin-card" routerLink="/admin-bookings">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="flex-grow-1 overflow-hidden">
+              <p class="text-uppercase fw-medium text-muted text-truncate mb-0 fs-14"> Todays Booking</p>
+            </div>
+          </div>
+          <div class="d-flex align-items-end justify-content-between mt-3">
+            <div>
+              <h4 class="fs-22 fw-semibold ff-secondary mb-0"></h4>
+              <a class="text-decoration-underline">View Todays Booking</a>
+            </div>
+            <div class="avatar-sm flex-shrink-0">
+              <span class="avatar-title bg-soft-primary rounded fs-3">
+                <i class="pi pi-bookmark-fill text-primary fs-3" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
+        </div><!-- end card body -->
+      </div><!-- end card -->
+    </div><!-- end col -->
+  </div>
+  <div class="row mt-3 mb-3">
+    <div class="col-xl-8">
+      <div class="card">
+        <div class="card-header align-items-center d-flex ">
+          <h4 class="card-title mb-0 pb-2 flex-grow-1 border-bottom">DateWise Bookings</h4>
+        </div><!-- end card header -->
+
+        <div class="card-body p-2 pb-2">
+
+
+        </div><!-- end card body -->
+      </div><!-- end card -->
+    </div><!-- end col -->
+    <div class="col-xl-4">
+      <div class="row">
+        <div class="col-xl-12 col-md-6">
+          <!-- card -->
+          <div class="card card-animate hand margin-card" routerLink="/admin-package">
+            <div class="card-body cardHeight">
+              <div class="d-flex align-items-center">
+                <div class="flex-grow-1 overflow-hidden">
+                  <p class="text-uppercase fw-medium text-muted text-truncate mb-0 fs-14"> Total Packages</p>
+                </div>
+              </div>
+              <div class="d-flex align-items-end justify-content-between mt-3">
+                <div>
+                  <h4 class="fs-22 fw-semibold ff-secondary mb-0"></h4>
+                  <a class="text-decoration-underline">View Total Packages</a>
+                </div>
+                <div class="avatar-sm flex-shrink-0">
+                  <span class="avatar-title bg-soft-danger rounded fs-3">
+                    <i class="pi pi-check-square fs-3" [ngStyle]="{'color': 'red'}" aria-hidden="true"></i>
+                  </span>
+                </div>
+              </div>
+            </div><!-- end card body -->
+          </div><!-- end card -->
+        </div>
+        <div class="col-xl-12 col-md-6 mt-3">
+          <!-- card -->
+          <div class="card card-animate hand" routerLink="/admin-room">
+            <div class="card-body cardHeight">
+              <div class="d-flex align-items-center">
+                <div class="flex-grow-1 overflow-hidden">
+                  <p class="text-uppercase fw-medium text-muted text-truncate mb-0 fs-14"> Total Rooms</p>
+                </div>
+              </div>
+              <div class="d-flex align-items-end justify-content-between mt-3">
+                <div>
+                  <h4 class="fs-22 fw-semibold ff-secondary mb-0"></h4>
+                  <a class="text-decoration-underline">View Total Rooms</a>
+                </div>
+                <div class="avatar-sm flex-shrink-0">
+                  <span class="avatar-title bg-soft-secondary rounded fs-3">
+                    <i class="fa fa-home text-secondary" aria-hidden="true"></i>
+                  </span>
+                </div>
+              </div>
+            </div><!-- end card body -->
+          </div><!-- end card -->
+        </div>
+        <div class="col-xl-12 col-md-6 mt-3">
+          <!-- card -->
+          <div class="card card-animate hand" routerLink="/admin-create-user">
+            <div class="card-body cardHeight">
+              <div class="d-flex align-items-center">
+                <div class="flex-grow-1 overflow-hidden">
+                  <p class="text-uppercase fw-medium text-muted text-truncate mb-0 fs-14"> Total Users</p>
+                </div>
+              </div>
+              <div class="d-flex align-items-end justify-content-between mt-3">
+                <div>
+                  <h4 class="fs-22 fw-semibold ff-secondary mb-0"></h4>
+                  <a class="text-decoration-underline">View Total Users</a>
+                </div>
+                <div class="avatar-sm flex-shrink-0">
+                  <span class="avatar-title bg-soft-dark2 rounded fs-3">
+                    <i class="fa fa-users text-white" aria-hidden="true"></i>
+                  </span>
+                </div>
+              </div>
+            </div><!-- end card body -->
+          </div><!-- end card -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

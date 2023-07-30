@@ -22,6 +22,9 @@ import { ClientUserLayoutComponent } from './pages/client-user-layout/client-use
 import { ClientAdminLayoutComponent } from './pages/client-admin-layout/client-admin-layout.component';
 import { HttpClientModule } from "@angular/common/http";
 import { AssignPackageComponent } from './pages/assign-package/assign-package.component';
+import {ToastModule} from 'primeng/toast';
+import {MessageService} from 'primeng/api';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,9 +50,15 @@ import { AssignPackageComponent } from './pages/assign-package/assign-package.co
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      closeButton: true})
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

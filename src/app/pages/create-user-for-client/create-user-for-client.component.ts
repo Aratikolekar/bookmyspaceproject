@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { MasterService } from 'src/app/core/services/master.service';
 
 @Component({
@@ -24,7 +25,7 @@ export class CreateUserForClientComponent {
     role: '',
   };
   localData: any;
-  constructor(private masterServ: MasterService, private http: HttpClient) {
+  constructor(private masterServ: MasterService,private toastrSrv:ToastrService, private http: HttpClient) {
     this.getAllClient();
 
     const local = localStorage.getItem('logUserName');
@@ -78,7 +79,7 @@ export class CreateUserForClientComponent {
   addUser() {
 
     if (this.isAPICallInProgress == false) {
-      console.log('if ststement executed');
+
       this.isAPICallInProgress = true;
     this.masterServ.addUser(this.userObj).subscribe((res: any) => {
       this.userObj = res.data;
@@ -87,11 +88,13 @@ export class CreateUserForClientComponent {
         this.onReset();
         this.isSidePannelOpen = false;
 
-        alert(res.message);
+        this.toastrSrv.success(res.message);
+
       }
       this.isAPICallInProgress == false;
       // else {
-      //   alert(res.message);
+            //this.toastrSrv.error(res.message);
+
       // }
     });
   }
@@ -107,9 +110,11 @@ export class CreateUserForClientComponent {
     this.masterServ.onDeleteUser(id).subscribe((res: any) => {
       if (res.result) {
         this.getUser();
-        alert(res.message);
+        this.toastrSrv.success(res.message);
+
       } else {
-        alert(res.message);
+      this.toastrSrv.error(res.message);
+
       }
     });
   }
@@ -121,9 +126,11 @@ export class CreateUserForClientComponent {
         this.onReset();
         this.isSidePannelOpen = false;
 
-        alert(res.message);
+        this.toastrSrv.success(res.message);
+
       } else {
-        alert(res.message);
+     this.toastrSrv.error(res.message);
+
       }
     });
   }

@@ -27,12 +27,12 @@ export class LoginComponent {
 
         if (result.result) {
           localStorage.setItem('logUserName',JSON.stringify(result.data))
-          if (result.data.role == 'Admin') {
+          if (result.data.role == 'admin') {
 
             this.router.navigateByUrl('admin-dashboard');
-          } else if (result.data.role == 'ClientAdmin') {
+          } else if (result.data.role == 'clientAdmin') {
             this.router.navigateByUrl('client-dashboard');
-          } else if (result.data.role == 'ClientUser') {
+          } else if (result.data.role == 'clientUser') {
             this.router.navigateByUrl('user-dashboard');
           }
          this.isAPICallInProgress == false;

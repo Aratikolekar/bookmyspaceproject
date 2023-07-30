@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { MasterService } from 'src/app/core/services/master.service';
 
 @Component({
@@ -22,7 +23,7 @@ export class CreatePackagesComponent {
     packageDescription: '',
     isPackageActive: false,
   };
-  constructor(private http: HttpClient, private pkgServ: MasterService) {
+  constructor(private http: HttpClient, private pkgServ: MasterService,private toastrSrv:ToastrService) {
     this.getPackage();
   }
   onReset() {
@@ -43,9 +44,9 @@ export class CreatePackagesComponent {
     });
   }
   addPackage() {
-    console.log('add package');
+
     if (this.isAPICallInProgress == false) {
-      console.log('if ststement executed');
+
       this.isAPICallInProgress = true;
 
     this.pkgServ.addPackage(this.packageObj).subscribe((res: any) => {
@@ -55,7 +56,7 @@ export class CreatePackagesComponent {
         this.onReset();
         this.isSidePannelOpen = false;
 
-        alert(res.message);
+        this.toastrSrv.success(res.message);
       }
         this.isAPICallInProgress = false;
 
@@ -81,10 +82,10 @@ export class CreatePackagesComponent {
         this.onReset();
         this.isSidePannelOpen = false;
 
-        alert(res.message);
+        this.toastrSrv.success(res.message);
         this.isAPICallInProgress = true;
       } else {
-        alert(res.message);
+        this.toastrSrv.error(res.message);
       }
     });
   }
@@ -92,9 +93,9 @@ export class CreatePackagesComponent {
     this.pkgServ.onDeletePkg(id).subscribe((res: any) => {
       if (res.result) {
         this.getPackage();
-        alert(res.message);
+        this.toastrSrv.success(res.message);
       } else {
-        alert(res.message);
+        this.toastrSrv.error(res.message);
       }
     });
   }

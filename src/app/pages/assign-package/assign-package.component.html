@@ -73,7 +73,7 @@
               <div class="col-6">
                 <label for="">Select Client</label>
                 <select class="form-select" name="clientId" [(ngModel)]="packageObj.clientId">
-                  <option  disabled>Select Client</option>
+                  <option disabled>Select Client</option>
                   <option [value]="item.clientId" *ngFor="let item of clientArray">{{item.clientName}}</option>
                 </select>
               </div>
@@ -112,9 +112,10 @@
                 <button class="btn btn-danger" (click)="onReset()">Reset</button>
 
                 <button class="btn btn-success ms-4" [disabled]="form.invalid" *ngIf="packageObj.clientPackageId == 0"
-                  (click)="addPackage()">Save  <span class="spinner-grow spinner-grow-sm" *ngIf="isAPICallInProgress"></span></button>
-                <button class="btn btn-primary" *ngIf="packageObj.clientPackageId != 0"
-                  (click)="onUpdate()">Update  <span class="spinner-grow spinner-grow-sm" *ngIf="isAPICallInProgress"></span></button>
+                  (click)="addPackage()">Save <span class="spinner-grow spinner-grow-sm"
+                    *ngIf="isAPICallInProgress"></span></button>
+                <button class="btn btn-primary" *ngIf="packageObj.clientPackageId != 0" (click)="onUpdate()">Update
+                  <span class="spinner-grow spinner-grow-sm" *ngIf="isAPICallInProgress"></span></button>
 
               </div>
             </div>
@@ -124,17 +125,17 @@
     </div>
   </div>
 </div>
-  <div class="col-4">
+<div class="col-4">
   <div class="modal" id="myModal">
-      <div class="modal-dialog">
-        <div class="modal-content">
+    <div class="modal-dialog">
+      <div class="modal-content">
 
-          <div class="modal-header">
-            <h4 class="modal-title">Packages </h4>
-            <button type="button" class="btn-close" (click)="openModel()" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body">
-           <form action="">
+        <div class="modal-header">
+          <h4 class="modal-title">Packages </h4>
+          <button type="button" class="btn-close" (click)="openModel()" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form action="">
             <div class="row">
 
               <div class="col-6">
@@ -173,18 +174,17 @@
                 <input type="checkbox" class="m-2 p-3" name="isActive" [(ngModel)]="packageObj.isActive">
               </div>
             </div>
-           </form>
-          </div>
-          <div class="modal-footer d-flex">
-            <button class="btn btn-success ms-4" *ngIf="packageObj.clientPackageId == 0"
-                  (click)="addPackage()">Save</button>
-            <button class="btn btn-primary" *ngIf="packageObj.clientPackageId != 0"
-            (click)="onUpdate()">Update</button>
-
-            <button type="button" class="btn btn-danger" (click)="closeModel()" data-bs-dismiss="modal">Close</button>
-          </div>
-
+          </form>
         </div>
+        <div class="modal-footer d-flex">
+          <button class="btn btn-success ms-4" *ngIf="packageObj.clientPackageId == 0"
+            (click)="addPackage()">Save</button>
+          <button class="btn btn-primary" *ngIf="packageObj.clientPackageId != 0" (click)="onUpdate()">Update</button>
+
+          <button type="button" class="btn btn-danger" (click)="closeModel()" data-bs-dismiss="modal">Close</button>
+        </div>
+
       </div>
     </div>
-</div>  -->
+  </div>
+</div> -->
